@@ -41,5 +41,12 @@ class NumberPlate extends Model
         return $this->hasMany(Notification::class);
     }
 
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
+    
+    public function users(){
+        return $this->belongsTo(User::class,'id','user_id');
+    }
    
 }

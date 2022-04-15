@@ -15,12 +15,13 @@ class CreateNumberPlatesTable extends Migration
     {
         Schema::create('number_plates', function (Blueprint $table) {
             $table->id();
-            $table->text('logo');
-            $table->string('logo_name');
+            $table->integer('user_id');
+            $table->text('logo')->nullable();
+            $table->string('logo_name')->nullable();;
             $table->string('plate_number_en');
-            $table->string('plate_number_ar');
+            $table->string('plate_number_ar')->nullable();;
             $table->string('plate_alphabets_en');
-            $table->string('plate_alphabets_ar');
+            $table->string('plate_alphabets_ar')->nullable();;
             $table->float('price');
             $table->string('price_type');
             $table->string('calling_country_code');

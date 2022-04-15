@@ -43,7 +43,9 @@ Route::group(['middleware' => 'auth:api','namespace' => 'Api'], function(){
     Route::post('uploadPlate', 'AuthController@uploadPlate');
     Route::get('notification', 'AuthController@notification');
     Route::post('helpSupport', 'AuthController@helpSupport');
+    Route::post('filterPlate','AuthController@filterPlate');
 
 
     
 });
+

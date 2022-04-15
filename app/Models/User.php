@@ -20,11 +20,20 @@ class User extends Model
     }
 
    public function number_plate(){
-       return $this->belongsTo(NumberPlate::class,'id','user_id');
+       return $this->hasMany(NumberPlate::class);
    }
 
    public function notification(){
        return $this->hasMnay(Notification::class);
    }
+
+   public function user_message(){
+    return $this->hasOne(Help_support::class,'user_id','id');
+}
+
+
+  public function number_plates(){
+    return $this->belongsTo(NumberPlate::class);
+}
    
 }

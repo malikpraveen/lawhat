@@ -35,7 +35,7 @@ class AuthController extends Controller
                     $plate->is_favourites = 0;
                 }
             }
-            $data['plate1']=$plate;
+            $data['plates']=$plate;
             return response()->json([
                 "status" => true,
                 "data"=> $data,
@@ -56,15 +56,15 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'country_code' => ['required'],
-            'mobile_number' => ['required'],
+            'country_code' => 'required',
+            'mobile_number' => 'required',
            
         ],[
             'mobile_number.required'        =>  trans('messages.F022'),
             'country_code.required'         =>  trans('messages.F023'),
         ]);
      
-        if($request->mobile_number){
+        if($request->mobile_number && $request->country_code){
             $validator->after(function($validator) use(&$user, $request) {
                 
                   $mobile_number = User::where('country_code',$request['country_code'])->where('mobile_number',$request['mobile_number'])->whereNotIn('status',['trashed'])->first();
@@ -82,6 +82,12 @@ class AuthController extends Controller
         
         if ($validator->fails()) {
            $this->message = $validator->errors();
+           return response()->json([
+            "status" => false,
+            "data"=> [],
+            "message"=>  $this->message,
+            "status_code" =>201,
+         ], 200);
         }else{
             if($request->mobile_number){
                  $userStatus = User::where('country_code', $request->country_code)->where('mobile_number', $request->mobile_number)->orderBy('created_at', 'desc')->first();
@@ -89,7 +95,7 @@ class AuthController extends Controller
    
             if($userStatus['status'] == 'inactive' || 'active'){
 
-                $otpUser['otp']            =   '111111';
+                $otpUser['otp']            =    1111;
                 $otpUser['user_id']         =   $userStatus['id'];
                 $otp                        =   Otp::create($otpUser);
 
@@ -409,7 +415,7 @@ class AuthController extends Controller
     }
 
     public function editProfile(Request $request){
-
+        if (Auth::guard('api')->id()) {
             $update['user_name'] = $request['user_name'];
             $update['email'] = $request['email'];
               
@@ -447,7 +453,7 @@ class AuthController extends Controller
                 ], 201);
             }
             
-            
+        }  
         
     }
 
@@ -693,6 +699,27 @@ class AuthController extends Controller
 
             }
         }
+
+    }
+
+    public function filterPlate(Request $request){
+        //return $id = Auth::guard('api')->id();
+        if(NumberPlate::where('user_id', Auth::guard('api')->id())->exists()){
+             $get_plate = NumberPlate::where('plate_status', $request->plate_status)->get();
+             return response()->json([
+                'status' => true,
+                'status_code'=>200,
+                'data' => $get_plate,
+                'message'=> 'plate filter successfully',
+              ], 200);
+         }else{
+            return response()->json([
+                'error_code' => 201,
+                'data'=>'',
+                'message'=> 'some error occured.',
+            ], 201);
+
+         }
 
     }
     
