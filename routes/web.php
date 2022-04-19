@@ -43,12 +43,19 @@ Route::any('otp/{id}', [
         'as' => 'admin.user.filter'
     ]);
     Route::get('/user-detail/{id}', 'Admin\UserController@show');
+    Route::get('/edit_profile','Admin\AdminController@edit_profile');
+    Route::post('/edit_profileUpdate/{id}','Admin\AdminController@edit_update');
+
+ 
+
 
     Route::get('/plate-management', 'Admin\PlateController@index');
-    Route::get('/upload_plate','Admin\PlateController@upload_plate');
+    Route::post('/plate/submit','Admin\PlateController@upload_plate');
     Route::get('/plate_detail/{id}', 'Admin\PlateController@plateDetail');
     Route::post('/plate_delete','Admin\PlateController@plate_delete');
     Route::get('/upload_plate_page','Admin\PlateController@upload_plate_page');
+    Route::post('/notificationPeriod/submit','Admin\PlateController@submit');
+
 
     
 
@@ -56,10 +63,14 @@ Route::any('otp/{id}', [
 
 
  Route::get('/sub-admin-management', 'Admin\SubAdminController@index');
- Route::post('/sub-admin/change_status','Admin\SubAdminController@change_status');
+ Route::post('/sub_admin/change_status','Admin\SubAdminController@change_status');
  Route::post('sub_admin/submit','Admin\SubAdminController@submit');
  Route::any('edit-subadmin/{id}', 'Admin\SubAdminController@edit_subadmin');
  Route::post('/subadmin/edit_update/{id}','Admin\SubAdminController@edit_update');
+ Route::get('/change_password','Admin\SubAdminController@change_password');
+ Route::Post('subadmin/change_password','Admin\SubAdminController@reset_password');
+
+
 
  Route::get('/content-management','Admin\ContentController@index');
  Route::get('/edit-content/{id}','Admin\ContentController@content_edit');

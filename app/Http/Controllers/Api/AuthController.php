@@ -124,20 +124,6 @@ class AuthController extends Controller
             if ($updateArr) {
                 User::where('id',$user->id)->update($updateArr);
             }
-             
-            $userTokens = $user->tokens;
-
-            if($userTokens){
-                foreach($userTokens as $token) {
-                   
-                    $token->revoke();   
-                }
-            }
-
-            $tokenResult =  $user->createToken('MyApp');
-            $token = $tokenResult->token;
-            $token->save();
-            $data['token'] = $tokenResult->accessToken;
             // $token = $user->createToken('MyApp')->accessToken;
             // if($token){
             //   $data['token'] = $token;
@@ -180,6 +166,12 @@ class AuthController extends Controller
         if ($validator->fails()) {
 
             $this->message = $validator->errors();
+            return response()->json([
+                "status" => false,
+                "data"=> [],
+                "message"=>  $this->message,
+                "status_code" =>201,
+             ], 200);
         }
         else
         {
@@ -236,7 +228,7 @@ class AuthController extends Controller
         $user = User::find($request->user_id);
         if($user){
      
-            $otpUser['otp']             =   rand(100000,999999);
+            $otpUser['otp']             =   1111;
             $otpUser['user_id']         =   $request->user_id;
             $otp                        =   OTP::create($otpUser);
           
@@ -299,6 +291,12 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             $this->message = $validator->errors();
+            return response()->json([
+                "status" => false,
+                "data"=> [],
+                "message"=>  $this->message,
+                "status_code" =>201,
+             ], 200);
         }else{
             if(Favourite::where('user_id',Auth::guard('api')->id())->where('plate_id',$request->plate_id)->exists()){
                 return response()->json([
@@ -339,6 +337,12 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             $this->message = $validator->errors();
+            return response()->json([
+                "status" => false,
+                "data"=> [],
+                "message"=>  $this->message,
+                "status_code" =>201,
+             ], 200);
         }else{
                 $UnFavourite = Favourite::where('user_id', Auth::guard('api')->id())->where('plate_id',$request->plate_id)->delete();
                 return response()->json([
@@ -359,7 +363,7 @@ class AuthController extends Controller
         $plate_alphabets_en = $request->plate_alphabets_en;
         $plate_alphabets_ar = $request->plate_alphabets_ar;
 
-        $result = DB::table('number_plates')
+        $result = DB::table('number_plates')->orderBy('id','desc')
         ->where(function($query) use ($plate_number_en, $plate_number_ar, $plate_alphabets_en, $plate_alphabets_ar) { 
             if ($plate_number_en)
                 $query->where('plate_number_en', 'like', '%'.$plate_number_en.'%');
@@ -414,48 +418,98 @@ class AuthController extends Controller
         }
     }
 
-    public function editProfile(Request $request){
-        if (Auth::guard('api')->id()) {
-            $update['user_name'] = $request['user_name'];
-            $update['email'] = $request['email'];
+    // public function editProfile(Request $request){
+    //     if (Auth::guard('api')->id()) {
+    //         $update['user_name'] = $request['user_name'];
+    //         $update['email'] = $request['email'];
               
-            if($request->profile_pic){
-                $filename = $request->profile_pic->getClientOriginalName();
-                $filename = str_replace(" ", "", $filename);
-                $imageName = time().'.'.$filename;
-                if(env('APP_ENV') == 'local'){
-                    $return = $request->profile_pic->move(
-                    base_path() . '/public/uploads/user/', $imageName);
-                }else{
-                    $return = $request->profile_pic->move(
-                    base_path() . '/../public/uploads/user/', $imageName);
-                }
-                $url = url('/uploads/user/');
-                $update['profile_pic'] = $url.'/'. $imageName;
+    //         if($request->profile_pic){
+    //             $filename = $request->profile_pic->getClientOriginalName();
+    //             $filename = str_replace(" ", "", $filename);
+    //             $imageName = time().'.'.$filename;
+    //             if(env('APP_ENV') == 'local'){
+    //                 $return = $request->profile_pic->move(
+    //                 base_path() . '/public/uploads/user/', $imageName);
+    //             }else{
+    //                 $return = $request->profile_pic->move(
+    //                 base_path() . '/../public/uploads/user/', $imageName);
+    //             }
+    //             $url = url('/uploads/user/');
+    //             $update['profile_pic'] = $url.'/'. $imageName;
              
-            }
+    //         }
         
-            $update_user = User::where('id',Auth::guard('api')->id())->update($update);
-            $user=User::select('*')->find(Auth::guard('api')->id());
-            $data['user']=$user;
-            if ($update_user) {
-                return response()->json([
-                    'status' => true,
-                    'status_code' =>200,
-                    'data' => $data,
-                    'message'=> 'user update successfully',
-                ], 200);
-            } else {
-                return response()->json([
-                    'error_code' => 201,
-                    'data'=>'',
-                    'message'=> 'User cannot be updated, some error occured.',
-                ], 201);
-            }
+    //         $update_user = User::where('id',Auth::guard('api')->id())->update($update);
+    //         $user=User::select('*')->find(Auth::guard('api')->id());
+    //         $data['user']=$user;
+    //         if ($update_user) {
+    //             return response()->json([
+    //                 'status' => true,
+    //                 'status_code' =>200,
+    //                 'data' => $data,
+    //                 'message'=> 'user update successfully',
+    //             ], 200);
+    //         } else {
+    //             return response()->json([
+    //                 'error_code' => 201,
+    //                 'data'=>'',
+    //                 'message'=> 'User cannot be updated, some error occured.',
+    //             ], 201);
+    //         }
             
-        }  
+    //     }  
         
-    }
+    // }
+
+    public function editProfile(Request $request){
+        $update=[];
+        if($request->user_name){
+            $update['user_name'] = $request['user_name'];
+        }
+        if($request->email){
+             $update['email'] = $request['email'];
+        }
+        if($request->profile_pic){
+             $base64_str = substr($request->profile_pic, strpos($request->profile_pic, ",")+1);
+            //decode base64 string
+            $extension = explode('/', explode(':', substr($request->profile_pic, 0, strpos($request->profile_pic, ';')))[1])[1];
+            $filename = 'user-'.Auth::guard('api')->id().time().'.'.$extension;
+            define('UPLOAD_DIR', base_path() . '/public/uploads/user/');
+            $file = UPLOAD_DIR . $filename;
+            file_put_contents($file,base64_decode($base64_str));
+            // if(env('APP_ENV') == 'local'){
+            //     $return = $request->profile_pic->move(
+            //     base_path() . '/public/uploads/user/', $imageName);
+            // }else{
+            //     $return = $request->profile_pic->move(
+            //     base_path() . '/../public/uploads/user/', $imageName);
+            // }
+            $url = url('/uploads/user/');
+            // $update['profile_pic'] = $url.'/'. $imageName;
+            $update['profile_pic'] = $url.'/'.$filename;
+        }
+        if($update){
+            $update_user = User::where('id',Auth::guard('api')->id())->update($update);
+        }else{
+            $update_user=true;
+        }
+        $user=User::select('*')->find(Auth::guard('api')->id());
+        $data['user']=$user;
+        if ($update_user) {
+            return response()->json([
+                'status' => true,
+                'status_code' =>200,
+                'data' => $data,
+                'message'=> 'user update successfully',
+            ], 200);
+        } else {
+            return response()->json([
+                'error_code' => 201,
+                'data'=>'',
+                'message'=> 'User cannot be updated, some error occured.',
+            ], 201);
+        }
+}
 
     public function aboutUs(){
         $content = Content::select('id', 'description_en')->where('name', 'about_us')->get()->first();
@@ -493,7 +547,7 @@ class AuthController extends Controller
 
     public function myPlates(Request $request){
         // return $id = Auth::guard('api')->id();
-        $plates = NumberPlate::select('*')->where('user_id',Auth::guard('api')->id())->where('status','enable')->get();
+        $plates = NumberPlate::select('*')->where('user_id',Auth::guard('api')->id())->where('status','enable')->orderBy('id','desc')->get();
         $myPlates = [];
          if($plates){
              foreach($plates as $plate){
@@ -540,20 +594,50 @@ class AuthController extends Controller
         ]);
 
         $validator->after(function($validator) use($request) {
+            if($request['plate_number_en']){
+                $plate_number_en = NumberPlate::where('plate_number_en',$request['plate_number_en'])->where('status',['enable'])->first();
+                if ($plate_number_en) {
+                    $validator->errors()->add('plate_number_en', trans('duplicate entry'));
+                }
+            }
+            if($request['plate_number_ar']){
+                $plate_number_ar = NumberPlate::where('plate_number_ar',$request['plate_number_ar'])->where('status',['enable'])->first();
+                if ($plate_number_ar) {
+                    $validator->errors()->add('plate_number_ar', trans('duplicate entry'));
+                }
+            }
+            if($request['plate_alphabets_en']){
+                $plate_alphabets_en = NumberPlate::where('plate_alphabets_en',$request['plate_alphabets_en'])->where('status',['enable'])->first();
+                if ($plate_alphabets_en) {
+                    $validator->errors()->add('plate_alphabets_en', trans('duplicate entry'));
+                }
+            }
+            if($request['plate_alphabets_ar']){
+                $plate_alphabets_ar = NumberPlate::where('plate_alphabets_ar',$request['plate_alphabets_ar'])->where('status',['enable'])->first();
+                if ($plate_alphabets_ar) {
+                    $validator->errors()->add('plate_alphabets_ar', trans('duplicate entry'));
+                }
+            }
             
             
         });
 
         if ($validator->fails()) {
             $this->message = $validator->errors();
+            return response()->json([
+                "status" => false,
+                "data"=> [],
+                "message"=>  $this->message,
+                "status_code" =>201,
+             ], 201);
         }else{
             $is_agree = "disagree";
             $insert=[
                 'user_id'              =>Auth::guard('api')->id(),
                 'plate_number_en'      =>$request->plate_number_en,
-                // 'plate_number_ar'      => $request->plate_number_ar,
+                'plate_number_ar'      => $request->plate_number_ar,
                 'plate_alphabets_en'   => $request->plate_alphabets_en,
-                // 'plate_alphabets_ar'   => $request->plate_alphabets_ar,
+                'plate_alphabets_ar'   => $request->plate_alphabets_ar,
                 'price'                => $request->price,
                 'email'                => $request->email,   
             ];
@@ -574,7 +658,7 @@ class AuthController extends Controller
                  if($registered_number){
                     $insert['calling_country_code'] = $registered_number->country_code;
                     $insert['calling_number'] = $registered_number->mobile_number;
-                    //$insert['calling_number_type'] = "registered _number";
+                    $insert['calling_number_type'] = "registered _number";
 
                  }
              }
@@ -590,7 +674,7 @@ class AuthController extends Controller
                 if($registered_number){
                    $insert['whatsapp_country_code'] = $registered_number->country_code;
                    $insert['whatsapp_number'] = $registered_number->mobile_number;
-                   //$insert['whatsapp_number_type'] = "registered_number";
+                   $insert['whatsapp_number_type'] = "registered_number";
 
                 }
             }
@@ -705,7 +789,7 @@ class AuthController extends Controller
     public function filterPlate(Request $request){
         //return $id = Auth::guard('api')->id();
         if(NumberPlate::where('user_id', Auth::guard('api')->id())->exists()){
-             $get_plate = NumberPlate::where('plate_status', $request->plate_status)->get();
+             $get_plate = NumberPlate::where('plate_status', $request->plate_status)->orderBy('id','desc')->get();
              return response()->json([
                 'status' => true,
                 'status_code'=>200,

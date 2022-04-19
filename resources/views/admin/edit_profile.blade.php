@@ -3,10 +3,10 @@
 @section('content')
 <div class="content-wrapper">
     <div class="content-header sty-one">
-        <h1>Sub Admin</h1> 
+        <h1> Admin</h1> 
         <ol class="breadcrumb">
             <li><a href="<?=url('admin/dashboard')?>">Home</a></li>
-            <li><i class="fa fa-angle-right"></i> Edit Sub Admin</li>
+            <li><i class="fa fa-angle-right"></i> Edit Profile </li>
         </ol>
     </div>
 
@@ -26,19 +26,19 @@
                 @endif
        <div class="card mb-2">
             <div class="card-header mb-4">
-               <h5 class="card-title">Edit Sub Admin</h5>
+               <h5 class="card-title">Edit Profile</h5>
            </div>
-           <form method="POST" id="addForm" enctype="multipart/form-data" action="{{url('admin/subadmin/edit_update',[base64_encode($edit_subadmin->id)])}}" >
+           <form method="POST" id="addForm" enctype="multipart/form-data" action="{{url('admin/edit_profileUpdate',[base64_encode($edit_admin->id)])}}" >
                         @csrf
            <div class="card-body">
             
               <div class="col-md-6 mb-4 offset-3">
               <div class="col-md-12 mb-4">
-                     <input type="text" class="form-control validate" name="name" value="{{ old('name', $edit_subadmin['name']) }}"   placeholder="Enter Sub Admin Name">
+                     <input type="text" class="form-control validate" name="name" value="{{ old('name', $edit_admin['name']) }}"   placeholder="Enter Sub Admin Name">
                       <p class="text-danger" id="nameError"></p>
                    </div>
                    <div class="col-md-12 mb-4">
-                     <input type="text" class="form-control validate" name="email" value="{{ old('email', $edit_subadmin['email']) }}" placeholder="Enter Email">
+                     <input type="text" class="form-control validate" name="email" value="{{ old('email', $edit_admin['email']) }}" placeholder="Enter Email">
                       <p class="text-danger" id="emailError"></p>
                    </div>
                    <div class="col-md-12 mb-4">

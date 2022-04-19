@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
+use Validator;
 use Illuminate\Support\Facades\Session;
 
 use DB;
@@ -30,14 +31,16 @@ class SubAdminController extends Controller
 
 
     public function change_status(Request $request){
+        if(Session::get('admin_logged_in')['type']=='0'){
         $id = $request->input('id');
         $status = $request->input('action');
-        $update = Admin::find($id)->where('type','1')->update(['status' => $status]);
+        $update = Admin::find($id)->update(['status'=>$status]);
         if ($update) {
             return response()->json(['status' => true, 'error_code' => 200, 'message' => 'Status updated successfully']);
         } else {
             return response()->json(['status' => false, 'error_code' => 201, 'message' => 'Error while updating status']);
         }
+    }
 
 
     }
@@ -105,5 +108,39 @@ class SubAdminController extends Controller
    }
 }
 
+
+public function change_password(Request $request){
+    if (!Auth::guard('admin')->check()) {
+        return redirect()->intended('admin/login');
+    } else {
+        
+         return view('admin.sub_admin.change_password');
+        
+    }
+}
+
+public function reset_password(Request $request){
+    
+        $this->validate($request, [
+            'old_password'     => 'required',
+            'new_password'     => 'required|min:6',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        $user_id = Auth::guard('admin')->id();    
+        $user_password =Admin:: find($user_id);       
+        if(\Hash::check($request->input('old_password'), $user_password->password))
+        {          
+        //   $user_id = \Auth::User()->id;                       
+          $obj_user = Admin::find($user_id);
+          $data['password'] = \Hash::make($request->input('new_password'));
+         $update = Admin::find($user_id)->update($data);
+         return redirect('admin/change_password')->with('success', 'Password update successfully.');
+        }
+        else
+        {           
+           return redirect()->back()->with('error', 'Please enter correct current password ');
+        } 
+}
   
 }

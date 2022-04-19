@@ -16,6 +16,7 @@ use App\Models\Admin;
 use App\Models\NumberPlate;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
 class AdminController extends Controller {
@@ -68,10 +69,44 @@ class AdminController extends Controller {
             $data['total_plates'] = count($total_plates);
              return view('admin.dashboard')->with($data);
         }
+
+    }
+
+    public function edit_profile(Request $request){
+        if (!Auth::guard('admin')->check()) {
+            return redirect()->intended('admin/login');
+        } else {
+            if(Session::get('admin_logged_in')['type']=='0'){
+                $data['edit_admin'] = Admin::where('id',Auth::guard('admin')->id())->where('status','active')->first();
+             return view('admin.edit_profile')->with($data);
+            }
+        }
+        
     }
     
 
-    
+    public function edit_update(Request $request, $id=null){
+        if(Session::get('admin_logged_in')['type']=='0'){
+        $id = base64_decode($id);
+        $data=[
+            "name" => $request->input('name'),
+            "email" => $request->input('email'),
+            'password' => Hash::make($request->password),
+            'type' => '0',
+            'otp' => mt_rand(10000,999999),
+
+        ];
+  
+   $update = Admin::find($id)->update($data);
+   if($update){
+       return redirect('admin/edit_profile')->with('success', ' update successfully.');
+   }
+   else {
+       return redirect()->back()->with('error', 'Some error occurred while update ');
+   }
+
+   }
+}
 
     
 

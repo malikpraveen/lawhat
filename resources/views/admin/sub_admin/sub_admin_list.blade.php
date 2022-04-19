@@ -149,7 +149,7 @@
                             }
                             if (id) {
                                 $.ajax({
-                                    url: "<?= url('admin/sub-admin/change_status') ?>",
+                                    url: "<?= url('admin/sub_admin/change_status') ?>",
                                     type: 'post',
                                     data: 'id=' + id + '&action=' + status + '&_token=<?= csrf_token() ?>',
                                     success: function (data) {

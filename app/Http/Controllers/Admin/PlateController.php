@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\NumberPlate;
+use App\Models\TimePeriod;
 use DB;
 
 class PlateController extends Controller
@@ -24,98 +25,40 @@ class PlateController extends Controller
 
 
     public function upload_Plate(Request $request){
-
-        $validator = \Validator::make($request->all(), [
-            'email'              =>  'required',
-            'calling_number_type'     =>  'required',
-
-            
-        ],[
-            'email.required'     =>  trans('messages.F044'),
-            'calling_number_type.required' => trans('message. F044')
-
-        ]);
-
-        $validator->after(function($validator) use($request) {
-            
-            
-        });
-
-        if ($validator->fails()) {
-            $this->message = $validator->errors();
-        }else{
-            $is_agree = "disagree";
-            $insert=[
-                'user_id'              =>Auth::guard('api')->id(),
+        if(Session::get('admin_logged_in')['type']=='1'){
+         $user_id = Session::get('admin_logged_in')['id'];
+             $insert=[
+                'user_id'              =>$user_id,
                 'plate_number_en'      =>$request->plate_number_en,
-                // 'plate_number_ar'      => $request->plate_number_ar,
+                'plate_number_ar'      => $request->plate_number_ar,
                 'plate_alphabets_en'   => $request->plate_alphabets_en,
-                // 'plate_alphabets_ar'   => $request->plate_alphabets_ar,
-                'price'                => $request->price,
-                'email'                => $request->email,   
+                'plate_alphabets_ar'   => $request->plate_alphabets_ar,
+                // 'price_type'            => $request->type,
+                'price'                 =>$request->price,
+                'email'                => $request->email, 
+                'user_name'            =>$request->name,
+                'calling_number'       =>$request->calling_number,
+                'whatsapp_number'      =>$request->whatsapp_number,
             ];
             
-           if($request->price_type == 'negotiable'){
+           if($request->type == 'noFixed'){
 
               $insert['price_type'] = "negotiable";
 
              } 
-              elseif($request->price_type == 'fixed')   {
+              elseif($request->type == 'fixed')   {
 
                $insert['price_type'] = "fixed";
              } 
-           
-            if($request->calling_number_type== 'registered number'){
-                $registered_number  = User::select('country_code','mobile_number')->where('id',Auth::guard('api')->id())->first();
-                //  return $registered_number->country_code;
-                 if($registered_number){
-                    $insert['calling_country_code'] = $registered_number->country_code;
-                    $insert['calling_number'] = $registered_number->mobile_number;
-                    //$insert['calling_number_type'] = "registered _number";
-
-                 }
-             }
-             elseif($request->calling_number_type == 'new number'){
-                $insert['calling_country_code'] = $request->calling_country_code;
-                $insert['calling_number'] = $request->calling_number;
-                $insert['calling_number_type'] = 'new_number';
-
-            }
-          
-            if($request['whatsapp_number_type'] == 'registered number'){
-                $registered_number  = User::select('country_code','mobile_number')->where('id',Auth::guard('api')->id())->first();
-                if($registered_number){
-                   $insert['whatsapp_country_code'] = $registered_number->country_code;
-                   $insert['whatsapp_number'] = $registered_number->mobile_number;
-                   //$insert['whatsapp_number_type'] = "registered_number";
-
-                }
-            }
-            elseif($request->whatsapp_number_type == 'new number'){
-           
-               $insert['whatsapp_country_code'] = $request->whatsapp_country_code;
-               $insert['whatsapp_number'] = $request->whatsapp_number;
-               $insert['whatsapp_number_type'] = 'new_number';
-
-           }
-           
-
-          if($is_agree == 'disagree'){
-              $insert['plate_status'] = "0";
-          }else{
-            $insert['plate_status'] = "1";
-          }
-
+     
           // return $insert;
             $add=NumberPlate::create($insert);
             if ($add) {
-                return redirect()->back()->with('success','sub Admin added successfully');
+                return redirect()->back()->with('success','Plate added successfully');
              } else {
-                 return redirect()->back()->with('error', 'Some error occurred while adding sub admin');
+                 return redirect()->back()->with('error', 'Some error occurred while adding plate');
              }
-        }
-        
-
+            }
     }
 
     public function plateDetail(Request $request, $id=null){
@@ -151,6 +94,24 @@ class PlateController extends Controller
         }
     }
 
+  public function submit(Request $request){
+    if(Session::get('admin_logged_in')['type']=='0'){
+       $data =[
+            'first_time_period' => $request->firstNotification,
+           'grace_period' =>  $request->secondNotification,
+           'notification_id'    => 1,
+       ];
 
+       $add=TimePeriod::create($data);
+       if ($add) {
+           return redirect()->back()->with('success','Time Period added successfully');
+        } else {
+            return redirect()->back()->with('error', 'Some error occurred while adding plate');
+        }
+       
+
+    }
+
+  }
   
 }

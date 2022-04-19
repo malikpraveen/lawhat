@@ -7,8 +7,10 @@
             <ul class="nav navbar-nav"> 
                 <li class="dropdown user user-menu p-ph-res"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">  <span class="hidden-xs">Admin</span> <img src="{{asset('assets/admin/images/user.png')}}" class="user-image" alt="User Image"></a>
                     <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-user"></i> Edit Profile</a></li> 
-                     <li><a href="#"><i class="fa fa-lock"></i>Change Password</a></li>  
+                    @if(Session::get('admin_logged_in')['type']=='0')
+                    <li><a href="{{url('admin/edit_profile')}}"><i class="fa fa-user"></i> Edit Profile</a></li> 
+                    @endif
+                     <li><a href="{{url('admin/change_password')}}"><i class="fa fa-lock"></i>Change Password</a></li>  
                         <li><a href="#exampleModal-out" data-direction="finish" data-toggle="modal"><i class="fa fa-sign-out"></i> Logout</a></li>
                     </ul>
                 </li>

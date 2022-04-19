@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TimePeriod extends Model
 {
-    use HasFactory;
+      protected $table = "time_periods";
+      protected $fillable = ['notification_id','first_time_period','grace_period'];
 }

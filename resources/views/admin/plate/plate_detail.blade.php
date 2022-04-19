@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-md-4 ">
               <div class="left-text">
-                <h1>Arabic Numbers</h1>
+                <h1>{{$plate->plate_number_ar}}</h1>
                 <p>{{$plate->plate_number_en}}</p>
               </div>
             </div>
@@ -36,8 +36,8 @@
             </div>
             <div class="col-md-4">
               <div class="right-text">
-                <h1>Arabic Alphabets</h1>
-                <p>{{$plate->alphabets_en}}</p>
+                <h1>{{$plate->plate_alphabets_ar}}</h1>
+                <p>{{$plate->plate_alphabets_en}}</p>
               </div>
             </div>
           </div>

@@ -13,7 +13,7 @@
                         <div class="box-profile text-white d-flex">
                          <div class="col-md-6">
                            <h3 class="profile-username">User's Information</h3> 
-                            <img class="profile-user-img img-responsive img-circle m-b-2" style="margin:0" src="{{asset('/assets/admin/images/user.png')}}" alt="User profile picture">
+                            <img class="profile-user-img img-responsive img-circle m-b-2" style="margin:0" src="<?= $user->profile_pic?$user->profile_pic:asset('assets/admin/images/user.png') ?>" alt="User profile picture">
                             <h3 class="profile-username">{{$user->user_name}}</h3>
                          </div>
                             <div class="col-md-5">
@@ -61,18 +61,19 @@
           <div class="row">
             <div class="col-md-4 ">
               <div class="left-text">
-                <h1>Arabic number</h1>
+                <h1>{{$plate->plate_number_ar}}</h1>
                 <p>{{$plate->plate_number_en}}</p>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="logo-area">
+              <div class="logo-area text-center">
                 <img src="{{asset('/assets/admin/images/logo.png')}}" class="logo" alt="" />
+                <level>logo</level>
               </div>
             </div>
             <div class="col-md-4">
               <div class="right-text">
-                <h1>Arabic Alphabets</h1>
+                <h1>{{$plate->plate_alphabets_ar}}</h1>
                 <p>{{$plate->plate_alphabets_en}}</p>
               </div>
             </div>
@@ -126,18 +127,19 @@
           <div class="row">
             <div class="col-md-4 ">
               <div class="left-text">
-                <h1>Arabic Numbers</h1>
+                <h1>{{$plate->plate_number_ar}}</h1>
                 <p>{{$plate->plate_number_en}}</p>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="logo-area">
+              <div class="logo-area text-center">
                 <img src="{{asset('/assets/admin/images/logo.png')}}" class="logo" alt="" />
+                <level>logo</level>
               </div>
             </div>
             <div class="col-md-4">
               <div class="right-text">
-                <h1>Arabic Alphabets</h1>
+                <h1>{{$plate->plate_alphabets_en}}</h1>
                 <p>{{$plate->plate_alphabets_en}}</p>
               </div>
             </div>

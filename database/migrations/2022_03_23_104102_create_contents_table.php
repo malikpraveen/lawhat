@@ -17,7 +17,7 @@ class CreateContentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description_en');
-            $table->text('description_ar');
+            $table->text('description_ar')->nullable();
             $table->timestamps();
         });
     }
