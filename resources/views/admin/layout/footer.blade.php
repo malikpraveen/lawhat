@@ -1,7 +1,7 @@
 </div>
 <footer class="main-footer">
     <div class="pull-right hidden-xs">Version 1.0</div> 
-    Copyright © 2020 Meen.com. Designed by TECHGROPSE All rights reserved. 
+    Copyright © 2020 lawhat.com. Designed by TECHGROPSE All rights reserved. 
 </footer>
 
 <div class="modal fade modal-design" id="exampleModal-out" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">

@@ -18,18 +18,18 @@
                          </div>
                             <div class="col-md-5">
                                <div class="form-group">
-                                <input class="form-control validate" type="text" name="number" value="{{$user->user_name}}" placeholder="Mobile Number">
+                                <input class="form-control validate" type="text" name="number" readonly="true" value="{{$user->user_name}}" placeholder="Mobile Number">
                                 <p class="text-danger" id="sizeError"></p>
                               </div>
                       
                         
                                <div class="form-group">
-                                <input class="form-control validate" type="text" name="email" value="{{$user->email}}" placeholder=" Email">
+                                <input class="form-control validate" type="text" name="email" readonly="true" value="{{$user->email}}" placeholder=" Email">
                                 <p class="text-danger" id="sizeError"></p>
                             </div>
                            
                                <div class="form-group">
-                                <input class="form-control validate" type="text" name="registration_date" value="{{date('d-m-Y',strtotime($user->created_at))}}" placeholder="Registration Date">
+                                <input class="form-control validate" type="text" name="registration_date" readonly="true" value="{{date('d-m-Y',strtotime($user->created_at))}}" placeholder="Registration Date">
                                 <p class="text-danger" id="sizeError"></p>
                             </div>
                          </div>

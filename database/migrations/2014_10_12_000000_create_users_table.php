@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('device_token',1000)->nullable();
             $table->enum('device_type', ['android', 'ios','web']);
             $table->enum('is_otp_verified',['yes','no'])->default('no');
-            $table->enum('status',['active','inactive','trashed']);
+            $table->enum('status',['active','inactive','blocked','trashed']);
             $table->rememberToken();
             $table->timestamps();
         });

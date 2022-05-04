@@ -55,6 +55,12 @@ Route::any('otp/{id}', [
     Route::post('/plate_delete','Admin\PlateController@plate_delete');
     Route::get('/upload_plate_page','Admin\PlateController@upload_plate_page');
     Route::post('/notificationPeriod/submit','Admin\PlateController@submit');
+    Route::post('/changePlateStatus','Admin\PlateController@changePlateStatus');
+    Route::post('/plate/filter', [
+        'uses' => 'Admin\PlateController@filter_list',
+        'as' => 'admin.plate.filter'
+    ]);
+
 
 
     
@@ -86,10 +92,7 @@ Route::any('otp/{id}', [
 ]);
 Route::post('/query-delete','Admin\QueryController@query_delete');
 Route::get('/query-detail/{id}', 'Admin\QueryController@queryDetail');
-Route::post('/query/reply', [
-    'uses' => 'Admin\QueryController@query_reply',
-    'as' => 'admin.query.reply'
-]);
+Route::post('/query/reply/{id}','Admin\QueryController@query_reply');
 
 
 

@@ -39,10 +39,87 @@
                                  <div class="row mx-0 align-items-center">
                                     <div class="col px-2">
                                        <div class="form-group mb-0 my-2"> 
-                                          <input type="text"  class="form-control border-0 shadow-none validate" name="plate_number_ar" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                             placeholder="Arabics Number"/>
-                                          <input type="text"  class="form-control border-0 shadow-none validate" name="plate_number_en" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                             placeholder="888888"/>
+                                       <div class="row mx-0 mb-2">
+                
+              
+              
+                  <div class="col-3 px-1">
+                     <select class="form-select form-select_design" id="pname4"  name="pname3"  onchange="autofill3(4)" aria-label="Default select example">
+                     <option selected></option>
+                     <option >٠</option>
+                        <option >١</option>
+                        <option >٢</option>
+                        <option >٣</option>
+                        <option >٤</option>
+                        <option >٥</option>
+                        <option >٦</option>
+                        <option >٧</option>
+                        <option >٨</option>
+                        <option >٩</option>
+                     </select>
+                  </div>
+                  <div class="col-3 px-1">
+                     <select class="form-select form-select_design" id="pname3"  name="pname2"  onchange="autofill3(3)" aria-label="Default select example">
+                     <option selected></option>
+                     <option >٠</option>
+                        <option >١</option>
+                        <option >٢</option>
+                        <option >٣</option>
+                        <option >٤</option>
+                        <option >٥</option>
+                        <option >٦</option>
+                        <option >٧</option>
+                        <option >٨</option>
+                        <option >٩</option>
+                     </select>
+                  </div>
+                  <div class="col-3 px-1">
+                     <select class="form-select form-select_design" id="pname2"  name="pname1"  onchange="autofill3(2)" aria-label="Default select example">
+                     <option selected></option>
+                     <option >٠</option>
+                        <option >١</option>
+                        <option >٢</option>
+                        <option >٣</option>
+                        <option >٤</option>
+                        <option >٥</option>
+                        <option >٦</option>
+                        <option >٧</option>
+                        <option >٨</option>
+                        <option >٩</option>
+                     </select>
+                  </div>
+                  <div class="col-3 px-1">
+                     <select class="form-select form-select_design" id="pname1" name="pname"  onchange="autofill3(1)" aria-label="Default select example">
+                        <option selected></option>
+                        <option >٠</option>
+                        <option >١</option>
+                        <option >٢</option>
+                        <option >٣</option>
+                        <option >٤</option>
+                        <option >٥</option>
+                        <option >٦</option>
+                        <option >٧</option>
+                        <option >٨</option>
+                        <option >٩</option>
+                     </select>
+                  </div>
+               </div>
+
+
+               <div class="row mx-0 mb-2">
+                  <div class="col-3 px-1">
+                     <input class="form-control form_input_design" name ="plate_number_en" type="text" id='field1'>
+                  </div>
+                  <div class="col-3 px-1">
+                     <input class="form-control form_input_design" name ="plate_number_en1"  type="text" id='field2'>
+                  </div>
+                  <div class="col-3 px-1">
+                     <input class="form-control form_input_design" name ="plate_number_en2"  type="text" id='field3'>
+                  </div>
+                  <div class="col-3 px-1">
+                     <input class="form-control form_input_design" name ="plate_number_en3"  type="text" id='field4'>
+                  </div>
+               </div>
                                        </div>
                                     </div>
                                     <div class="col-md-3 px-md-0">
@@ -53,15 +130,95 @@
                                     </div>
                                     <div class="col px-2">
                                        <div class="form-group mb-0 my-2"> 
-                                          <input type="text"  class="form-control border-0 shadow-none validate" name="plate_alphabets_ar"   id="exampleInputEmail1" aria-describedby="emailHelp"
-                                             placeholder="Arabics Number"/>
-                                          <input type="text"  class="form-control border-0 shadow-none validate" name="plate_alphabets_en"  id="exampleInputEmail1" aria-describedby="emailHelp"
-                                             placeholder="888888"/>
+                                       <div class="row mx-0 mb-2">
+                
+              
+                  <div class="col px-1">
+                     <select class="form-select form-select_design" id="pname8" name="pname6"   onchange="autofill4(8)" aria-label="Default select example">
+                     <option selected></option>
+                     <option >أ </option>
+                        <option >ب</option>
+                        <option >ح</option>
+                        <option >د</option>
+                        <option >ر</option>
+                        <option >س </option>
+                        <option >ص</option>
+                        <option >ط </option>
+                        <option >ع </option>
+                        <option >ق </option>
+                        <option >ك</option>
+                        <option >ل </option>
+                        <option >م </option>
+                        <option >ن </option>
+                        <option >هـ </option>
+                        <option >و </option>
+                        <option >ى </option>
+                     </select>
+                  </div>
+                  <div class="col px-1">
+                     <select class="form-select form-select_design" id="pname7"  name="pname5"  onchange="autofill4(7)" aria-label="Default select example">
+                     <option selected></option>
+                     <option >أ </option>
+                        <option >ب</option>
+                        <option >ح</option>
+                        <option >د</option>
+                        <option >ر</option>
+                        <option >س </option>
+                        <option >ص</option>
+                        <option >ط </option>
+                        <option >ع </option>
+                        <option >ق </option>
+                        <option >ك</option>
+                        <option >ل </option>
+                        <option >م </option>
+                        <option >ن </option>
+                        <option >هـ </option>
+                        <option >و </option>
+                        <option >ى </option>
+                     </select>
+                  </div>
+                  <div class="col px-1">
+                     <select class="form-select form-select_design" id="pname6" name="pname4"  onchange="autofill4(6)" aria-label="Default select example">
+                        <option selected></option>
+                        <option >أ </option>
+                        <option >ب</option>
+                        <option >ح</option>
+                        <option >د</option>
+                        <option >ر</option>
+                        <option >س </option>
+                        <option >ص</option>
+                        <option >ط </option>
+                        <option >ع </option>
+                        <option >ق </option>
+                        <option >ك</option>
+                        <option >ل </option>
+                        <option >م </option>
+                        <option >ن </option>
+                        <option >هـ </option>
+                        <option >و </option>
+                        <option >ى </option>
+
+                     </select>
+                  </div>
+               </div>
+               <div class="row mx-0 mb-2">
+                  <div class="col px-1">
+                     <input class="form-control form_input_design" name ="plate_alphabets_en" type="text" id='field6'>
+                  </div>
+                  <div class="col px-1">
+                     <input class="form-control form_input_design" name ="plate_alphabets_en1" type="text" id='field7'>
+                  </div>
+                  <div class="col px-1">
+                     <input class="form-control form_input_design" name ="plate_alphabets_en2" type="text" id='field8'>
+                  </div>
+                 
+               </div>
+               
                                        </div>
                                     </div>
                                  </div>
                               </div>
-                              <p class="text-danger" id="plate_numberError"></p>
+                              <p class="text-danger" id="numberError"></p>
                               <div class="form-group mt-5">
                                  <label for="exampleInputEmail1">User Name</label>
                                  <input
@@ -91,9 +248,12 @@
                     
                      <div class="form-group">
                      <label for="exampleInputEmail1">Calling Number</label>
+                     <div className="d-flex">
+                      <span class="input-group-addon">+966</span>
                      <input
                         type="text"
-                        class="form-control validate"
+                        class="form-control flag_input validate"
+                        maxlength = "9"
                         name ="calling_number"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
@@ -101,17 +261,22 @@
                         />
                      <p class="text-danger" id="calling_numberError"></p>
                      </div>
+                     </div>
                      <div class="form-group">
                      <label for="exampleInputPassword1">Whatsapp Number</label>
+                     <div className="d-flex">
+                      <span class="input-group-addon">+966</span>
                      <input
                         type="text"
-                        class="form-control validate"
+                        class="form-control flag_input validate"
+                        maxlength = "9"
                         name ="whatsapp_number"
                         id="exampleInputPassword1"
                         placeholder="Enter no"
                         />
                         <p class="text-danger" id="whatsapp_numberError"></p>
                      </div>
+                    </div>
                      <div class="form-group">
                      <label for="exampleInputPassword1">Price</label>
                      <div class="form-check mt-1">
@@ -182,6 +347,21 @@
    
        }
    });
+   var formData = $("#addForm").find("select");
+   $(formData).each(function () {
+       var element = $(this);
+       var val = element.val();
+      
+       if (val == "" || val == "0" || val == null) {
+           
+       $("#numberError").html("Plate Number is required field, All characters are required");
+       flag = false;
+           
+           
+       } else {
+   
+       }
+   });
    
    if (flag) {
        $("#addForm").submit();
@@ -192,4 +372,45 @@
    
    }
 </script>
+
+
+<script>
+
+function autofill3(count){
+
+var arr = {"0":"٠","1":"١","2":"٢","3":"٣","4":"٤","5":"٥","6":"٦","7":"٧","8":"٨","9":"٩"};
+var inps = document.getElementById('pname'+ count).value;
+for(var key in arr)
+{
+    if(arr[key]==inps)
+         // console.log(key);
+         document.getElementById('field'+count).value= key;
+}
+ 
+
+
+
+    }
+</script>
+
+<script>
+
+function autofill4(count){
+var arr = { "A": 'أ', "B": 'ب','J':'ح','D':'د','R':'ر','S':'س','X':'ص','T':'ط','E':'ع','G':'ق','K':'ك','L':'ل','Z':'م','N':'ن','H':'هـ','U':'و','V':'ى'};
+var inps = document.getElementById('pname'+ count).value;
+for(var key in arr)
+{
+    if(arr[key]==inps)
+         // console.log(key);
+         document.getElementById('field'+count).value= key;
+}
+ 
+
+// document.getElementById('field'+count).value= Object.keys(imageList[j]);
+
+
+    }
+</script>
+
+
 @endsection

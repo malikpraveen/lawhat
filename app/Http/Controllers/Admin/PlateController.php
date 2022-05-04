@@ -18,27 +18,53 @@ class PlateController extends Controller
         if (!Auth::guard('admin')->check()) {
             return redirect()->intended('admin/login');
         } else {
-            $data['plate'] = NumberPlate::select('*')->get();
+            $data['plate'] = NumberPlate::select('*')->orderBy('id','desc')->get();
              return view('admin.plate.plate_list')->with($data);
         }
     }
 
 
     public function upload_Plate(Request $request){
+        $timeperiod = TimePeriod::first();
+         $time_period = $timeperiod->first_time_period;
         if(Session::get('admin_logged_in')['type']=='1'){
+             $plate_number_ar     = $request->get('pname').$request->get('pname1').$request->get('pname2').$request->get('pname3');
+            $plate_number_en      = $request->get('plate_number_en').$request->get('plate_number_en1').$request->get('plate_number_en2').$request->get('plate_number_en3');
+             $plate_alphabets_ar   = $request->get('pname4').$request->get('pname5').$request->get('pname6');
+             $plate_alphabets_en   = $request->get('plate_alphabets_en').$request->get('plate_alphabets_en1').$request->get('plate_alphabets_en2');
+
+            if($plate_number_ar &&  $plate_alphabets_ar  ){
+                $plate_number_abr = NumberPlate::where('plate_number_ar',$plate_number_ar)->where('plate_alphabets_ar',$plate_alphabets_ar)->where('status',['enable'])->first();
+                if ($plate_number_abr) {
+                    return redirect()->back()->with('error','Plate already added');
+                }
+            }
+            if($plate_number_en  && $plate_alphabets_en  ){
+                $plate_number_eng = NumberPlate::where('plate_number_en',$plate_number_en)->where('plate_alphabets_en',$plate_alphabets_en)->where('status',['enable'])->first();
+                if ($plate_number_eng) {
+                    return redirect()->back()->with('error','Plate already added');
+                }
+            }
+           
+           
+
          $user_id = Session::get('admin_logged_in')['id'];
-             $insert=[
+         $expiry_date = date('Y-m-d H:m:i', strtotime("+". $time_period . "days"));
+              $insert=[
                 'user_id'              =>$user_id,
-                'plate_number_en'      =>$request->plate_number_en,
-                'plate_number_ar'      => $request->plate_number_ar,
-                'plate_alphabets_en'   => $request->plate_alphabets_en,
-                'plate_alphabets_ar'   => $request->plate_alphabets_ar,
-                // 'price_type'            => $request->type,
+                'plate_number_ar'      => $plate_number_ar,
+                'plate_number_en'      =>  $plate_number_en,
+                'plate_alphabets_ar'   => $plate_alphabets_ar,
+                'plate_alphabets_en'   => $plate_alphabets_en,
+                'price_type'            => $request->type,
                 'price'                 =>$request->price,
                 'email'                => $request->email, 
                 'user_name'            =>$request->name,
                 'calling_number'       =>$request->calling_number,
                 'whatsapp_number'      =>$request->whatsapp_number,
+                'plate_status'         =>'1',
+                'expiry_date'          =>$expiry_date,
+                'added_by'            =>'1'
             ];
             
            if($request->type == 'noFixed'){
@@ -84,6 +110,10 @@ class PlateController extends Controller
       }
 }
 
+
+
+
+
     public function upload_plate_page() {
         if (!Auth::guard('admin')->check()) {
             return redirect()->intended('admin/login');
@@ -99,7 +129,7 @@ class PlateController extends Controller
        $data =[
             'first_time_period' => $request->firstNotification,
            'grace_period' =>  $request->secondNotification,
-           'notification_id'    => 1,
+           
        ];
 
        $add=TimePeriod::create($data);
@@ -113,5 +143,38 @@ class PlateController extends Controller
     }
 
   }
+
+  public function changePlateStatus(Request $request){
+    if(Session::get('admin_logged_in')['type']=='1'){
+    $id = $request->input('id');
+    $value = $request->input('action');
+    $update = NumberPlate::find($id)->update(['plate_status'=>$value]);
+    if ($update) {
+        return response()->json(['status' => true, 'error_code' => 200, 'message' => 'Plate Status updated successfully']);
+    } else {
+        return response()->json(['status' => false, 'error_code' => 201, 'message' => 'Error while updating status']);
+    }
+}
+
+
+}
+
+
+public function filter_list(Request $request) {
+    $start_date = date('Y-m-d 00:00:00', strtotime($request->input('start_date')));
+    $end_date = date('Y-m-d 23:59:59', strtotime($request->input('end_date')));
+    if ($request->input('start_date') && $request->input('end_date')) {
+        $plate = NumberPlate::where('status', '<>', 99)
+                ->whereBetween('created_at', [$start_date, $end_date])
+                ->orderBy('id', 'DESC')
+                ->get();
+    } else {
+        $plate = NumberPlate::where('status', '<>', 99)->orderBy('id', 'DESC')->get();
+    }
+    $data['start_date'] = $request->input('start_date');
+    $data['end_date'] = $request->input('end_date');
+    $data['plate'] = $plate;
+    return view('admin.plate.plate_list')->with($data);
+}
   
 }

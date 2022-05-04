@@ -26,11 +26,13 @@ class CreateNumberPlatesTable extends Migration
             $table->string('price_type');
             $table->string('calling_country_code')->nullable();
             $table->string('calling_number')->nullable();
-            $table->enum('calling_number_type',['registered_number','new_number'])->nullable();
+            $table->enum('calling_number_type',['registered number','new number'])->nullable();
             $table->string('whatsapp_country_code')->nullable();
             $table->string('whatsapp_number')->nullable();
-            $table->enum('whatsapp_number_type',['registered_number','new_number'])->nullable();
-            $table->string('email')->nullable();;
+            $table->enum('whatsapp_number_type',['registered number','new number'])->nullable();
+            $table->string('email')->nullable();
+            $table->datetime('expiry_date')->nullable();
+            $table->enum('extended_period',['original','extended','grace'])->nullable();
             $table->enum('added_by',['0','1'])->comment("0=user,1=admin");
             $table->enum('plate_status',['0','1','2'])->default('1')->comment("0=active,1=pending,2=sold");
             $table->enum('status',['enable','disable','trashed']);

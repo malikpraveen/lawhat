@@ -35,7 +35,7 @@
                         <a href="#filter" onclick="filterList(this)"; class="btn btn-primary pt-2 pb-2 w-100 mt-1">Search</a>
                         </div> 
                         <div class="col-md-4 col-xs-6 mt-1">
-                            <a href='<?= url('admin/user-management') ?>' class="btn btn-primary pt-2 pb-2 w-100 mt-1">Reset</a>
+                            <a href='<?= url('admin/query-management') ?>' class="btn btn-primary pt-2 pb-2 w-100 mt-1">Reset</a>
                         </div>     
                     </div> 
                 </form>  

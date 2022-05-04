@@ -25,8 +25,8 @@
           <div class="row">
             <div class="col-md-4 ">
               <div class="left-text">
-                <h1>{{$plate->plate_number_ar}}</h1>
-                <p>{{$plate->plate_number_en}}</p>
+                <h1 style="letter-spacing: 10px;">{{$plate->plate_number_ar}}</h1>
+                <p style="letter-spacing: 10px;">{{$plate->plate_number_en}}</p>
               </div>
             </div>
             <div class="col-md-4">
@@ -36,8 +36,8 @@
             </div>
             <div class="col-md-4">
               <div class="right-text">
-                <h1>{{$plate->plate_alphabets_ar}}</h1>
-                <p>{{$plate->plate_alphabets_en}}</p>
+                <h1 style="letter-spacing: 10px;">{{$plate->plate_alphabets_ar}}</h1>
+                <p style="letter-spacing: 10px;">{{$plate->plate_alphabets_en}}</p>
               </div>
             </div>
           </div>
@@ -54,10 +54,18 @@
           <div class="middle-line"></div>
           <div class="d-flex justify-content-between">
             <!-- <button type="button" class="btn btn-primary b-t-n">Details</button> -->
-            <a href="#" onclick="deleteData(this,'{{$plate->id}}');" class="btn btn-primary b-t-n" style="width: 100% !important;">Delete</a>
+            <!-- <a href="#" onclick="deleteData(this,'{{$plate->id}}');" class="btn btn-primary b-t-n" style="width: 100% !important;">Delete</a> -->
           </div>
         </div>
       </div>
+      <div class="form-group">
+          <label for="exampleInputPassword1">
+            Uploading Date:-
+            <span class="ml-2" style="color: black; font-size: 13px">
+            {{date('d-m-Y',strtotime($plate->created_at))}}
+            </span>
+          </label>
+        </div>
     </div>
     <div class="col-md-6 mt-5">
       <h5>User's Informations</h5>
@@ -75,13 +83,27 @@
         <div class="form-group">
           <label for="exampleInputEmail1">Mobile Number</label>
           <input
-            type="email"
-            class="form-control"
+          style="padding-left:77px;"
+            type="text"
+            class="form-control flag_input"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            value="{{$plate->user->mobile_number}}"
+            value="{{$plate->user->country_code}}&nbsp;&nbsp;{{$plate->user->mobile_number}}"
             readonly='true'
-            placeholder="Enter email"
+            placeholder=" mobile number"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Whatsapp Number</label>
+          <input
+          style="padding-left:77px;"
+            type="text"
+            class="form-control flag_input"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            value="{{$plate->whatsapp_country_code}}&nbsp;&nbsp;{{$plate->whatsapp_number}}"
+            readonly='true'
+            placeholder=" Whatsapp number"
           />
         </div>
         <div class="form-group">
@@ -92,7 +114,7 @@
             id="exampleInputPassword1"
             value="{{$plate->user->email}}"
             readonly='true'
-            placeholder="Password"
+            placeholder="Email"
           />
         </div>
         <div class="form-group">
@@ -126,7 +148,7 @@
   </div>
   </div>
 </div>
-            
+</div>
            </div>
 
             </div>

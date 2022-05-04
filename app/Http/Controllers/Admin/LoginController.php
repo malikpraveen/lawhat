@@ -191,8 +191,8 @@ class LoginController extends Controller
         ]);
 
         $validator->after(function ($validator) use (&$user, $request) {
-            $user = Admin::where('email', $request->email)->where('type', '0')->orWhere('type','1')->first();
-           // dd($user);
+            $user = Admin::where('email', $request->email)->where('type', '0')->orWhere('type','1')->where('email', $request->email)->first();
+            //dd($user);
             if (empty($user)) {
                 $validator->errors()->add('email', 'Your account does not exist');
             } else {

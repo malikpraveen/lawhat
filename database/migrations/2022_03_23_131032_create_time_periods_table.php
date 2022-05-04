@@ -15,9 +15,8 @@ class CreateTimePeriodsTable extends Migration
     {
         Schema::create('time_periods', function (Blueprint $table) {
             $table->id();
-            $table->integer('notification_id');
-            $table->time('first_time_period');
-            $table->time('grace_period');
+            $table->string('first_time_period');
+            $table->string('grace_period');
             $table->timestamps();
         });
     }

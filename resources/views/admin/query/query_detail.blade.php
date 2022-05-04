@@ -6,6 +6,19 @@
         <h1>Help & Support Detail</h1> 
     </div>
     <div class="content">
+    @if(session()->has('success'))
+          <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{ session()->get('success') }}
+                </div>
+                @else 
+                @if(session()->has('error'))  
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{ session()->get('error') }}
+                </div>
+                @endif 
+         @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -23,14 +36,17 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="collapse" id="collapseExample">
-                                <form method="post" action="{{route('admin.query.reply')}}">
+                                <form method='post' id="addForm" enctype="multipart/form-data" action="{{url('admin/query/reply',[base64_encode($query->id)])}}">
                                         @csrf
                                     <div class="card card-body">
+                                    <div class="form-group">
                                         <label>Your Message</label>
-                                        <textarea class="form-control" name="reply" cols="6" rows="6" placeholder="Write here...."></textarea>
-                                        <div class="mt-4 mb-4 text-right">  <a style="cursor:default;" onclick="closeTab(this);" class="composemail">Cancel</a>   <a style="cursor:default;" onclick="sendReply(this,<?= $query->id ?>);" class="composemail">Send</a>  
+                                        <textarea class="form-control validate" name="reply" cols="6" rows="6" placeholder="Write here...."></textarea>
+                                        <div class="mt-4 mb-4 text-right">  <a style="cursor:default;" onclick="closeTab(this);" class="composemail">Cancel</a>   
+                                        <button type="button" style="margin: 15px; height: 32px; margin-top: -5px;"  class="mybtns pull-right" onclick="validate(this);" class="btn btn-primary">Send </button> 
                                         </div>
                                     </div>
+                                  </div>
                                </form>
                                 </div>
                             </div>
@@ -41,6 +57,35 @@
         </div>
     </div>
     <script>
+            function validate(obj) {
+            $(".text-danger").html('');
+            var flag = true;
+            var formData = $("#addForm").find(".validate:input").not(':input[type=button]');
+            $(formData).each(function () {
+                var element = $(this);
+                var val = element.val();
+                var name = element.attr("name");
+                if (val == "" || val == "0" || val == null) {
+                    
+                $("#" + name + "Error").html("This field is required");
+                flag = false;
+                    
+                    
+                } else {
+
+                }
+            });
+           
+            if (flag) {
+                $("#addForm").submit();
+            } else {
+                return false;
+            }
+
+            
+        }
+    </script>
+    <!-- <script>
         function sendReply(obj, id) {
             if (id) {
                 var reply = $(":input[name=reply]").val();
@@ -67,7 +112,8 @@
                 alert("Something went wrong");
             }
         }
-
+</script> -->
+<script>
         function closeTab(obj) {
             $('.collapse').removeClass('show');
             $('#openForm').show();

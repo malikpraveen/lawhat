@@ -86,7 +86,7 @@
                             if (checked == true) {
                                 var status = 'active';
                             } else {
-                                var status = 'inactive';
+                                var status = 'blocked';
                             }
                             if (id) {
                                 $.ajax({

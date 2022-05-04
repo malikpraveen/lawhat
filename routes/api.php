@@ -44,6 +44,11 @@ Route::group(['middleware' => 'auth:api','namespace' => 'Api'], function(){
     Route::get('notification', 'AuthController@notification');
     Route::post('helpSupport', 'AuthController@helpSupport');
     Route::post('filterPlate','AuthController@filterPlate');
+    Route::get('myProfile', 'AuthController@myProfile');
+     Route::post('editPlate', 'AuthController@editPlate');
+    Route::post('deletePlate', 'AuthController@deletePlate');
+    Route::post('updatePlateStatus', 'AuthController@updatePlateStatus');
+
 
 
     

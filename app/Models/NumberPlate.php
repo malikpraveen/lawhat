@@ -27,6 +27,8 @@ class NumberPlate extends Model
    "whatsapp_number",
    "whatsapp_number_type",
    "email",
+   "expiry_date",
+   "extended_period",
    "added_by",
    "plate_status",
    "status",

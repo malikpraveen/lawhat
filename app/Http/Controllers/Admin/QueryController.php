@@ -60,5 +60,20 @@ class QueryController extends Controller
  } 
 
  }
+
+
+ public function query_reply(Request $request, $id=null){
+      $id = $id = base64_decode($id);
+      $data=[
+        "reply" => $request->input('reply'),
+    ];
+      $update = Help_support::find($id)->update($data);
+      if($update){
+          return redirect()->back()->with('success', ' send successfully.');
+      }
+      else {
+          return redirect()->back()->with('error', 'Some error occurred while update ');
+      }
+ }
   
 }

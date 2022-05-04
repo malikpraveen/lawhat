@@ -1166,6 +1166,7 @@ ul.fa-ul {
 .sidebar-menu>li .badge {
     margin-top: 3px
 }
+
 .sidebar-menu li.header {
     padding: 10px 25px 10px 15px;
     font-size: 13px;
@@ -1537,7 +1538,7 @@ ul.list-inline li {
     margin-right: 10px
 }
 .dropdown-menu>li>a:hover {
-    background-color: #ec1d38;
+    background-color: #DBD301;
     color: #fff;
 }
 .dropdown-menu>.divider {
@@ -7739,3 +7740,57 @@ button.close.cross-btn{
     font-size: 80px !important;
     color: grey;
   }
+
+  .flag_input {
+    background: url(../images/flag.png);
+    background-position: 0%;
+    background-size: 54px;
+    background-repeat: no-repeat;
+    padding-left: 111px;
+}
+
+
+.form-select_design {
+    font-size: 14px;
+    height: 36px;
+    padding: 0;
+    background-size: 9px;
+    background-position: 26px;
+    box-shadow: unset !important;
+    outline: 0 !important;
+    border-radius: 6px;
+    background-image: none !important;
+    -webkit-appearance: none;
+    border: 1px solid #D5D5D5;
+    width: 113%;
+    text-align: center;
+}
+.form_input_design{
+    font-size: 14px;
+    height: 36px;
+    padding: 5px 9px;
+    box-shadow: unset !important;
+    outline: 0 !important;
+    width: 113%;
+    border-radius: 6px;
+}
+
+.input-group-addon {
+    padding: 10px 9px;
+    position: absolute;
+    margin-left: 55px;
+    margin-bottom: 17px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #464A4C;
+    text-align: center;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+
