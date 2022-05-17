@@ -547,7 +547,7 @@ class AuthController extends Controller
                 'status' => true,
                 'status_code' =>200,
                 'data' => $data,
-                'message'=> 'user update successfully',
+                'message'=> 'User update successfully',
             ], 200);
         } else {
             return response()->json([
@@ -848,7 +848,7 @@ class AuthController extends Controller
                 'status' => true,
                 'status_code'=>200,
                 'data' => $help_support,
-                'message'=> 'message add successfully',
+                'message'=> 'Message add successfully',
               ], 200);
             }else{
 
@@ -883,13 +883,13 @@ class AuthController extends Controller
                 'status' => true,
                 'status_code'=>200,
                 'data' => $get_plate,
-                'message'=> 'plate filter successfully',
+                'message'=> 'Plate filter successfully',
               ], 200);
          }else{
             return response()->json([
                 'error_code' => 201,
                 'data'=>[],
-                'message'=> 'some error occured.',
+                'message'=> 'Some error occured.',
             ], 201);
 
          }

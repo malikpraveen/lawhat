@@ -43,7 +43,7 @@
                 position: fixed;
                 display: flex;
                 background: #fdfbfb;
-                padding: 150px;
+                padding: 100px;
                 box-shadow: 0px 40px 60px -20px rgba(0, 0, 0, 0.2);
                 width:100%;
                 z-index:500000;
@@ -137,8 +137,8 @@
     </head>
     <body class="skin-blue sidebar-mini">
         <div class="loading loaderDiv">
-            <img class="mb-2" style="width: 40%;" src="{{asset('assets/admin/images/logo.png')}}" alt="logo">
-            <p>Please wait while page is loading..</p>
+            <img class="mb-2" style="width: 20%; margin-right: 65%;" src="{{asset('assets/admin/images/logo.png')}}" alt="logo">
+            <p style=" margin-right: 65%;">Please wait while page is loading..</p>
         </div>
         <div class="loading loader">
             <span></span>

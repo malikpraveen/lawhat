@@ -82,15 +82,15 @@ body {
 
 
 .swal-button--danger:not([disabled]):hover {
-    background-color: #DBD301;
+    background-color: #ee6e52;
 }
 
 .swal-button--danger {
-    background-color: #DBD301;
+    background-color: #FFB91D;
 } 
 
 .swal-button {
-    background-color: #DBD301;
+    background-color: #FFB91D;
     color: #fff;
     border: none;
     box-shadow: none;
@@ -1114,7 +1114,7 @@ ul.fa-ul {
 }
 .user-panel>.image>img {
     width: 100%;
-    max-width: 169px;
+    max-width: 247px;
     height: auto;
 }
 .user-panel>.info {
@@ -1538,7 +1538,7 @@ ul.list-inline li {
     margin-right: 10px
 }
 .dropdown-menu>li>a:hover {
-    background-color: #DBD301;
+    background-color: #FFB91D;
     color: #fff;
 }
 .dropdown-menu>.divider {
@@ -2870,7 +2870,7 @@ caption.bottom {
     padding: 1.25rem;
 }
 .card-header {
-    background-color: #DBD301;
+    background-color: #FFB91D;
     padding: 12px 10px;
     border-bottom: 0;
     box-shadow: 0px 0 1px 1px #e8e8e8cc;
@@ -3309,7 +3309,7 @@ small.text-muted {
     background-color: #e7e7e7
 }
 .btn-primary  {
-    background-color: #DBD301;
+    background-color: #FFB91D;
     border-color: transparent;
 }
 caption button.btn-default {
@@ -3319,8 +3319,8 @@ caption button.btn-default {
     color: #FFF;
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary.hover, caption button.btn-default:hover {
-    background-color: #DBD301;
-    border-color: #DBD301;
+    background-color: #FFB91D;
+    border-color: #FFB91D;
 }
 .btn-success {
     background-color: #00a65a;
@@ -3774,8 +3774,8 @@ ul.plan-list li {
     z-index: 3;
     color: #fff;
     cursor: default;
-    background-color: #DBD301;
-    border-color: #DBD301;
+    background-color: #FFB91D;
+    border-color: #FFB91D;
 }
 .pagination.pagination-flat>li>a {
     border-radius: 0 !important
@@ -6170,7 +6170,7 @@ iframe {
     color: red !important;
 }
 .composemail{
-    background: #DBD301;
+    background: #FFB91D;
     color: #ffffff !important;
     padding: 7px 10px !important;
     margin-top: 0px;
@@ -6334,8 +6334,8 @@ iframe {
 
 .mybtns {
     color: #fff!important;
-    background-color: #DBD301;
-    border-color: #DBD301;
+    background-color: #FFB91D;
+    border-color: #FFB91D;
     border-radius: 5px;
     padding: 9px 30px;
     font-size: 14px;
@@ -6798,18 +6798,18 @@ button, html [type=button] {
     width: 100%;
     height: 50px;
     border-radius: 5px;
-    border: 1px solid #389DFB;;
-    background: #389DFB;;
+    border: 1px solid #FFB91D;;
+    background: #FFB91D;;
     line-height: 24px;
 }
 .mybtns-send:hover{
-    background-color: #389DFB;
-    border-color: #389DFB;
+    background-color: #FFB91D;
+    border-color: #FFB91D;
 }
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #389DFB;
-    border-color: #389DFB;
+    background-color: #FFB91D;
+    border-color: #FFB91D;
 }
 .eyepassword{
     position: relative;

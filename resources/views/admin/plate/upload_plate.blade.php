@@ -42,9 +42,23 @@
                                        <div class="row mx-0 mb-2">
                 
               
-              
+                                       <div class="col-3 px-1">
+                     <select class="form-select form-select_design" id="pname1" name="pname"  onchange="autofill3(1)" aria-label="Default select example">
+                        <option selected></option>
+                        <option >٠</option>
+                        <option >١</option>
+                        <option >٢</option>
+                        <option >٣</option>
+                        <option >٤</option>
+                        <option >٥</option>
+                        <option >٦</option>
+                        <option >٧</option>
+                        <option >٨</option>
+                        <option >٩</option>
+                     </select>
+                  </div>
                   <div class="col-3 px-1">
-                     <select class="form-select form-select_design" id="pname4"  name="pname3"  onchange="autofill3(4)" aria-label="Default select example">
+                     <select class="form-select form-select_design" id="pname2"  name="pname1"  onchange="autofill3(2)" aria-label="Default select example">
                      <option selected></option>
                      <option >٠</option>
                         <option >١</option>
@@ -74,7 +88,7 @@
                      </select>
                   </div>
                   <div class="col-3 px-1">
-                     <select class="form-select form-select_design" id="pname2"  name="pname1"  onchange="autofill3(2)" aria-label="Default select example">
+                     <select class="form-select form-select_design" id="pname4"  name="pname3"  onchange="autofill3(4)" aria-label="Default select example">
                      <option selected></option>
                      <option >٠</option>
                         <option >١</option>
@@ -88,21 +102,9 @@
                         <option >٩</option>
                      </select>
                   </div>
-                  <div class="col-3 px-1">
-                     <select class="form-select form-select_design" id="pname1" name="pname"  onchange="autofill3(1)" aria-label="Default select example">
-                        <option selected></option>
-                        <option >٠</option>
-                        <option >١</option>
-                        <option >٢</option>
-                        <option >٣</option>
-                        <option >٤</option>
-                        <option >٥</option>
-                        <option >٦</option>
-                        <option >٧</option>
-                        <option >٨</option>
-                        <option >٩</option>
-                     </select>
-                  </div>
+                  
+                 
+               
                </div>
 
 
@@ -132,11 +134,10 @@
                                        <div class="form-group mb-0 my-2"> 
                                        <div class="row mx-0 mb-2">
                 
-              
-                  <div class="col px-1">
-                     <select class="form-select form-select_design" id="pname8" name="pname6"   onchange="autofill4(8)" aria-label="Default select example">
-                     <option selected></option>
-                     <option >أ </option>
+                                       <div class="col px-1">
+                     <select class="form-select form-select_design" id="pname6" name="pname4"  onchange="autofill4(6)" aria-label="Default select example">
+                        <option selected></option>
+                        <option >أ </option>
                         <option >ب</option>
                         <option >ح</option>
                         <option >د</option>
@@ -153,6 +154,7 @@
                         <option >هـ </option>
                         <option >و </option>
                         <option >ى </option>
+
                      </select>
                   </div>
                   <div class="col px-1">
@@ -178,9 +180,9 @@
                      </select>
                   </div>
                   <div class="col px-1">
-                     <select class="form-select form-select_design" id="pname6" name="pname4"  onchange="autofill4(6)" aria-label="Default select example">
-                        <option selected></option>
-                        <option >أ </option>
+                     <select class="form-select form-select_design" id="pname8" name="pname6"   onchange="autofill4(8)" aria-label="Default select example">
+                     <option selected></option>
+                     <option >أ </option>
                         <option >ب</option>
                         <option >ح</option>
                         <option >د</option>
@@ -197,9 +199,10 @@
                         <option >هـ </option>
                         <option >و </option>
                         <option >ى </option>
-
                      </select>
                   </div>
+                 
+                
                </div>
                <div class="row mx-0 mb-2">
                   <div class="col px-1">
@@ -285,10 +288,11 @@
                         type="radio"
                         name="type"
                         value="noFixed"
+                        onclick="hide()"
                         id="flexRadioDefault1"
                         />
                      <label class="form-check-label" >
-                     No Fixed Price
+                     Negotiable Price
                      </label>
                      </div>
                      <div class="form-check mt-1">
@@ -297,7 +301,9 @@
                         type="radio"
                         name="type"
                         value="fixed"
+                        onclick="show()"
                         id="flexRadioDefault1"
+                        
                         />
                      <label class="form-check-label" >
                      Fixed Price
@@ -307,8 +313,10 @@
                         type="text"
                         class="form-control mt-1 validate"
                         id="area"
+                        style="display:none"
                         name="price"
                         placeholder="Enter Price"
+                       
                         />
                         <p class="text-danger" id="priceError"></p>
                      </div>

@@ -132,7 +132,7 @@
   <div class="modal-dialog">
    <!-- Modal content-->
     <div class="modal-content">
-     <div class="modal-header" style="background-color: #DBD301;">
+     <div class="modal-header" style="background-color: #FFB91D;">
       <h4 class="modal-title">User Detail</h4>
     </div>
     <div class="modal-body">

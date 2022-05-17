@@ -60,8 +60,8 @@ color: #000000;
 }
 .skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
    color: #ffffff;
-   background: #DBD301;
-   border-left-color: #DBD301;
+   background: #FFB91D;
+   border-left-color: #FFB91D;
    border-radius: 8px;
 } 
 .skin-blue .sidebar-menu>li>.treeview-menu {
